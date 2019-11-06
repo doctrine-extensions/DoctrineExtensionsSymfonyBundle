@@ -1,6 +1,6 @@
 <?php
 
-namespace Stof\DoctrineExtensionsBundle\Uploadable;
+namespace DoctrineExtensions\SymfonyBundle\Uploadable;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Gedmo\Uploadable\UploadableListener;

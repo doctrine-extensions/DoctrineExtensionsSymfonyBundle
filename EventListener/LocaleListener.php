@@ -1,6 +1,6 @@
 <?php
 
-namespace Stof\DoctrineExtensionsBundle\EventListener;
+namespace DoctrineExtensions\SymfonyBundle\EventListener;
 
 use Gedmo\Translatable\TranslatableListener;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

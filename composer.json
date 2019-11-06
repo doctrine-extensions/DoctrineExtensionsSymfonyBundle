@@ -1,14 +1,18 @@
 {
-    "name": "stof/doctrine-extensions-bundle",
+    "name": "doctrine-extensions/symfony-bundle",
     "type": "symfony-bundle",
-    "description": "Integration of the gedmo/doctrine-extensions with Symfony2",
+    "description": "Integration of Doctrine Extensions into Symfony projects.",
     "keywords": ["tree", "behaviors", "doctrine2", "extensions", "gedmo", "sluggable","loggable", "translatable", "nestedset", "sortable", "timestampable"],
-    "homepage": "https://github.com/stof/StofDoctrineExtensionsBundle",
+    "homepage": "https://github.com/doctrine-extensions/DoctrineExtensionsSymfonyBundle",
     "license": "MIT",
     "authors": [
         {
             "name": "Christophe Coevoet",
             "email": "stof@notk.org"
+        },
+        {
+            "name": "Aken Roberts",
+            "email": "aken@cryode.com"
         }
     ],
     "require": {
@@ -17,6 +21,7 @@
         "gedmo/doctrine-extensions": "^2.3.4"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-master",
         "symfony/phpunit-bridge": "^4.0",
         "symfony/security-bundle": "^2.7 || ^3.2 || ^4.0"
     },
@@ -25,11 +30,6 @@
         "doctrine/mongodb-odm-bundle": "to use the MongoDB ODM extensions"
     },
     "autoload": {
-        "psr-4": { "Stof\\DoctrineExtensionsBundle\\": "" }
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "1.3.x-dev"
-        }
+        "psr-4": { "DoctrineExtensions\\SymfonyBundle\\": "" }
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace Stof\DoctrineExtensionsBundle\Tests\DependencyInjection;
+namespace DoctrineExtensions\SymfonyBundle\Tests\DependencyInjection;
 
-use Stof\DoctrineExtensionsBundle\DependencyInjection\StofDoctrineExtensionsExtension;
+use DoctrineExtensions\SymfonyBundle\DependencyInjection\DoctrineExtensionsSymfonyBundleExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class StofDoctrineExtensionsExtensionTest extends TestCase
+class DoctrineExtensionsSymfonyBundleExtensionTest extends TestCase
 {
     public static function provideExtensions()
     {
@@ -29,7 +29,7 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
      */
     public function testLoadORMConfig($listener)
     {
-        $extension = new StofDoctrineExtensionsExtension();
+        $extension = new DoctrineExtensionsSymfonyBundleExtension();
         $container = new ContainerBuilder();
 
         $config = array('orm' => array(
@@ -39,9 +39,9 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
 
         $extension->load(array($config), $container);
 
-        $this->assertTrue($container->hasDefinition('stof_doctrine_extensions.listener.'.$listener));
+        $this->assertTrue($container->hasDefinition('doctrine_extensions.listener.'.$listener));
 
-        $def = $container->getDefinition('stof_doctrine_extensions.listener.'.$listener);
+        $def = $container->getDefinition('doctrine_extensions.listener.'.$listener);
 
         $this->assertTrue($def->hasTag('doctrine.event_subscriber'));
 
@@ -55,7 +55,7 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
      */
     public function testLoadMongodbConfig($listener)
     {
-        $extension = new StofDoctrineExtensionsExtension();
+        $extension = new DoctrineExtensionsSymfonyBundleExtension();
         $container = new ContainerBuilder();
 
         $config = array('mongodb' => array(
@@ -65,9 +65,9 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
 
         $extension->load(array($config), $container);
 
-        $this->assertTrue($container->hasDefinition('stof_doctrine_extensions.listener.'.$listener));
+        $this->assertTrue($container->hasDefinition('doctrine_extensions.listener.'.$listener));
 
-        $def = $container->getDefinition('stof_doctrine_extensions.listener.'.$listener);
+        $def = $container->getDefinition('doctrine_extensions.listener.'.$listener);
 
         $this->assertTrue($def->hasTag('doctrine_mongodb.odm.event_subscriber'));
 
@@ -81,7 +81,7 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
      */
     public function testLoadBothConfig($listener)
     {
-        $extension = new StofDoctrineExtensionsExtension();
+        $extension = new DoctrineExtensionsSymfonyBundleExtension();
         $container = new ContainerBuilder();
 
         $config = array(
@@ -91,9 +91,9 @@ class StofDoctrineExtensionsExtensionTest extends TestCase
 
         $extension->load(array($config), $container);
 
-        $this->assertTrue($container->hasDefinition('stof_doctrine_extensions.listener.'.$listener));
+        $this->assertTrue($container->hasDefinition('doctrine_extensions.listener.'.$listener));
 
-        $def = $container->getDefinition('stof_doctrine_extensions.listener.'.$listener);
+        $def = $container->getDefinition('doctrine_extensions.listener.'.$listener);
 
         $this->assertTrue($def->hasTag('doctrine.event_subscriber'));
         $this->assertTrue($def->hasTag('doctrine_mongodb.odm.event_subscriber'));

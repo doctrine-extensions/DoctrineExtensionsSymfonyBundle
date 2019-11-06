@@ -1,6 +1,6 @@
 <?php
 
-namespace Stof\DoctrineExtensionsBundle\DependencyInjection;
+namespace DoctrineExtensions\SymfonyBundle\DependencyInjection;
 
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class StofDoctrineExtensionsExtension extends Extension
+class DoctrineExtensionsSymfonyBundleExtension extends Extension
 {
     private $entityManagers   = array();
     private $documentManagers = array();
@@ -28,24 +28,24 @@ class StofDoctrineExtensionsExtension extends Extension
         $this->entityManagers = $this->processObjectManagerConfigurations($config['orm'], $container, $loader, $loaded, 'doctrine.event_subscriber');
         $this->documentManagers = $this->processObjectManagerConfigurations($config['mongodb'], $container, $loader, $loaded, 'doctrine_mongodb.odm.event_subscriber');
 
-        $container->setParameter('stof_doctrine_extensions.default_locale', $config['default_locale']);
-        $container->setParameter('stof_doctrine_extensions.translation_fallback', $config['translation_fallback']);
-        $container->setParameter('stof_doctrine_extensions.persist_default_translation', $config['persist_default_translation']);
-        $container->setParameter('stof_doctrine_extensions.skip_translation_on_load', $config['skip_translation_on_load']);
+        $container->setParameter('doctrine_extensions.default_locale', $config['default_locale']);
+        $container->setParameter('doctrine_extensions.translation_fallback', $config['translation_fallback']);
+        $container->setParameter('doctrine_extensions.persist_default_translation', $config['persist_default_translation']);
+        $container->setParameter('doctrine_extensions.skip_translation_on_load', $config['skip_translation_on_load']);
 
         // Register the uploadable configuration if the listener is used
         if (isset($loaded['uploadable'])) {
             $uploadableConfig = $config['uploadable'];
 
-            $container->setParameter('stof_doctrine_extensions.default_file_path', $uploadableConfig['default_file_path']);
-            $container->setParameter('stof_doctrine_extensions.uploadable.default_file_info.class', $uploadableConfig['default_file_info_class']);
+            $container->setParameter('doctrine_extensions.default_file_path', $uploadableConfig['default_file_path']);
+            $container->setParameter('doctrine_extensions.uploadable.default_file_info.class', $uploadableConfig['default_file_info_class']);
             $container->setParameter(
-                'stof_doctrine_extensions.uploadable.validate_writable_directory',
+                'doctrine_extensions.uploadable.validate_writable_directory',
                 $uploadableConfig['validate_writable_directory']
             );
 
             if ($uploadableConfig['default_file_path']) {
-                $container->getDefinition('stof_doctrine_extensions.listener.uploadable')
+                $container->getDefinition('doctrine_extensions.listener.uploadable')
                     ->addMethodCall('setDefaultPath', array($uploadableConfig['default_file_path']));
             }
 
@@ -57,14 +57,14 @@ class StofDoctrineExtensionsExtension extends Extension
                 }
 
                 $container->setParameter(
-                    'stof_doctrine_extensions.uploadable.mime_type_guesser.class',
+                    'doctrine_extensions.uploadable.mime_type_guesser.class',
                     $uploadableConfig['mime_type_guesser_class']
                 );
             }
         }
 
         foreach ($config['class'] as $listener => $class) {
-            $container->setParameter(sprintf('stof_doctrine_extensions.listener.%s.class', $listener), $class);
+            $container->setParameter(sprintf('doctrine_extensions.listener.%s.class', $listener), $class);
         }
     }
 
@@ -122,7 +122,7 @@ class StofDoctrineExtensionsExtension extends Extension
                     $attributes['priority'] = $listenerPriorities[$ext];
                 }
 
-                $definition = $container->getDefinition(sprintf('stof_doctrine_extensions.listener.%s', $ext));
+                $definition = $container->getDefinition(sprintf('doctrine_extensions.listener.%s', $ext));
                 $definition->addTag($doctrineSubscriberTag, $attributes);
 
                 $usedManagers[$name] = true;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Stof\DoctrineExtensionsBundle\Uploadable;
+namespace DoctrineExtensions\SymfonyBundle\Uploadable;
 
 use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser;
 use Gedmo\Uploadable\MimeType\MimeTypeGuesserInterface;

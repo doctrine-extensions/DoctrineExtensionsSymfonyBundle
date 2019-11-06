@@ -1,6 +1,6 @@
 <?php
 
-namespace Stof\DoctrineExtensionsBundle\DependencyInjection;
+namespace DoctrineExtensions\SymfonyBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -14,12 +14,12 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder('stof_doctrine_extensions');
+        $treeBuilder = new TreeBuilder('doctrine_extensions');
         if (\method_exists($treeBuilder, 'getRootNode')) {
             $rootNode = $treeBuilder->getRootNode();
         } else {
             // BC layer for symfony/config 4.1 and older
-            $rootNode = $treeBuilder->root('stof_doctrine_extensions');
+            $rootNode = $treeBuilder->root('doctrine_extensions');
         }
 
         $rootNode
@@ -153,11 +153,11 @@ class Configuration implements ConfigurationInterface
                 ->end()
                 ->scalarNode('mime_type_guesser_class')
                     ->cannotBeEmpty()
-                    ->defaultValue('Stof\\DoctrineExtensionsBundle\\Uploadable\\MimeTypeGuesserAdapter')
+                    ->defaultValue('DoctrineExtensions\\SymfonyBundle\\Uploadable\\MimeTypeGuesserAdapter')
                 ->end()
                 ->scalarNode('default_file_info_class')
                     ->cannotBeEmpty()
-                    ->defaultValue('Stof\\DoctrineExtensionsBundle\\Uploadable\\UploadedFileInfo')
+                    ->defaultValue('DoctrineExtensions\\SymfonyBundle\\Uploadable\\UploadedFileInfo')
                 ->end()
                 ->booleanNode('validate_writable_directory')->defaultTrue()->end()
             ->end()

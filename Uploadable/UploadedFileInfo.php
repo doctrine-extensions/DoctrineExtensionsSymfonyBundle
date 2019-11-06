@@ -1,6 +1,6 @@
 <?php
 
-namespace Stof\DoctrineExtensionsBundle\Uploadable;
+namespace DoctrineExtensions\SymfonyBundle\Uploadable;
 
 use Gedmo\Uploadable\FileInfo\FileInfoInterface;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

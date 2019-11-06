@@ -1,12 +1,12 @@
 <?php
 
-namespace Stof\DoctrineExtensionsBundle;
+namespace DoctrineExtensions\SymfonyBundle;
 
-use Stof\DoctrineExtensionsBundle\DependencyInjection\Compiler\ValidateExtensionConfigurationPass;
+use DoctrineExtensions\SymfonyBundle\DependencyInjection\Compiler\ValidateExtensionConfigurationPass;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class StofDoctrineExtensionsBundle extends Bundle
+class DoctrineExtensionsSymfonyBundle extends Bundle
 {
     /**
      * {@inheritdoc}
