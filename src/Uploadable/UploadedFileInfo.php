@@ -40,7 +40,7 @@ class UploadedFileInfo implements FileInfoInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isUploadedFile()
     {

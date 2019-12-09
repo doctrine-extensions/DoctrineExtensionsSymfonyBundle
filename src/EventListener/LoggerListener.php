@@ -11,7 +11,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
- * Sets the username from the security context by listening on kernel.request
+ * Sets the username from the security context by listening on kernel.request.
  *
  * @author Christophe Coevoet <stof@notk.org>
  */
@@ -50,8 +50,8 @@ class LoggerListener implements EventSubscriberInterface
 
     public static function getSubscribedEvents()
     {
-        return array(
+        return [
             KernelEvents::REQUEST => 'onKernelRequest',
-        );
+        ];
     }
 }

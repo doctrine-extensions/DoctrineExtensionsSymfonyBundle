@@ -2,8 +2,8 @@
 
 namespace DoctrineExtensions\SymfonyBundle\Uploadable;
 
-use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser;
 use Gedmo\Uploadable\MimeType\MimeTypeGuesserInterface;
+use Symfony\Component\HttpFoundation\File\MimeType\MimeTypeGuesser;
 
 class MimeTypeGuesserAdapter implements MimeTypeGuesserInterface
 {
@@ -11,5 +11,4 @@ class MimeTypeGuesserAdapter implements MimeTypeGuesserInterface
     {
         return MimeTypeGuesser::getInstance()->guess($filePath);
     }
-
 }

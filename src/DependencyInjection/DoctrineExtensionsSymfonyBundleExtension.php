@@ -2,17 +2,17 @@
 
 namespace DoctrineExtensions\SymfonyBundle\DependencyInjection;
 
-use Symfony\Component\Config\Loader\LoaderInterface;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\Config\Definition\Processor;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
 use Symfony\Component\Config\FileLocator;
+use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 class DoctrineExtensionsSymfonyBundleExtension extends Extension
 {
-    private $entityManagers   = array();
-    private $documentManagers = array();
+    private $entityManagers = [];
+    private $documentManagers = [];
 
     public function load(array $configs, ContainerBuilder $container)
     {
@@ -21,9 +21,9 @@ class DoctrineExtensionsSymfonyBundleExtension extends Extension
 
         $config = $processor->processConfiguration($configuration, $configs);
 
-        $loader = new XmlFileLoader($container, new FileLocator(__DIR__ . '/../Resources/config'));
+        $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
 
-        $loaded = array();
+        $loaded = [];
 
         $this->entityManagers = $this->processObjectManagerConfigurations($config['orm'], $container, $loader, $loaded, 'doctrine.event_subscriber');
         $this->documentManagers = $this->processObjectManagerConfigurations($config['mongodb'], $container, $loader, $loaded, 'doctrine_mongodb.odm.event_subscriber');
@@ -46,7 +46,7 @@ class DoctrineExtensionsSymfonyBundleExtension extends Extension
 
             if ($uploadableConfig['default_file_path']) {
                 $container->getDefinition('doctrine_extensions.listener.uploadable')
-                    ->addMethodCall('setDefaultPath', array($uploadableConfig['default_file_path']));
+                    ->addMethodCall('setDefaultPath', [$uploadableConfig['default_file_path']]);
             }
 
             if ($uploadableConfig['mime_type_guesser_class']) {
@@ -87,23 +87,19 @@ class DoctrineExtensionsSymfonyBundleExtension extends Extension
     }
 
     /**
-     * @param array            $configs
-     * @param ContainerBuilder $container
-     * @param LoaderInterface  $loader
-     * @param array            $loaded
-     * @param string           $doctrineSubscriberTag
+     * @param string $doctrineSubscriberTag
      *
      * @return array
      */
     private function processObjectManagerConfigurations(array $configs, ContainerBuilder $container, LoaderInterface $loader, array &$loaded, $doctrineSubscriberTag)
     {
-        $usedManagers = array();
+        $usedManagers = [];
 
-        $listenerPriorities = array(
+        $listenerPriorities = [
             'translatable' => -10,
             'loggable' => 5,
             'uploadable' => -5,
-        );
+        ];
 
         foreach ($configs as $name => $listeners) {
             foreach ($listeners as $ext => $enabled) {
@@ -116,7 +112,7 @@ class DoctrineExtensionsSymfonyBundleExtension extends Extension
                     $loaded[$ext] = true;
                 }
 
-                $attributes = array('connection' => $name);
+                $attributes = ['connection' => $name];
 
                 if (isset($listenerPriorities[$ext])) {
                     $attributes['priority'] = $listenerPriorities[$ext];
