@@ -2,8 +2,8 @@
 
 namespace DoctrineExtensions\SymfonyBundle\DependencyInjection\Compiler;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
  * @internal
@@ -16,8 +16,6 @@ class ValidateExtensionConfigurationPass implements CompilerPassInterface
      * This validation runs in a discrete compiler pass because it depends on
      * DBAL and ODM services, which aren't available during the config merge
      * compiler pass.
-     *
-     * @param ContainerBuilder $container
      */
     public function process(ContainerBuilder $container)
     {

@@ -15,12 +15,7 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder('doctrine_extensions');
-        if (\method_exists($treeBuilder, 'getRootNode')) {
-            $rootNode = $treeBuilder->getRootNode();
-        } else {
-            // BC layer for symfony/config 4.1 and older
-            $rootNode = $treeBuilder->root('doctrine_extensions');
-        }
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->append($this->getVendorNode('orm'))
@@ -47,12 +42,7 @@ class Configuration implements ConfigurationInterface
     private function getVendorNode($name)
     {
         $treeBuilder = new TreeBuilder($name);
-        if (\method_exists($treeBuilder, 'getRootNode')) {
-            $node = $treeBuilder->getRootNode();
-        } else {
-            // BC layer for symfony/config 4.1 and older
-            $node = $treeBuilder->root($name);
-        }
+        $node = $treeBuilder->getRootNode();
 
         $node
             ->useAttributeAsKey('id')
@@ -78,12 +68,7 @@ class Configuration implements ConfigurationInterface
     private function getClassNode()
     {
         $treeBuilder = new TreeBuilder('class');
-        if (\method_exists($treeBuilder, 'getRootNode')) {
-            $node = $treeBuilder->getRootNode();
-        } else {
-            // BC layer for symfony/config 4.1 and older
-            $node = $treeBuilder->root('class');
-        }
+        $node = $treeBuilder->getRootNode();
 
         $node
             ->addDefaultsIfNotSet()
@@ -137,12 +122,7 @@ class Configuration implements ConfigurationInterface
     private function getUploadableNode()
     {
         $treeBuilder = new TreeBuilder('uploadable');
-        if (\method_exists($treeBuilder, 'getRootNode')) {
-            $node = $treeBuilder->getRootNode();
-        } else {
-            // BC layer for symfony/config 4.1 and older
-            $node = $treeBuilder->root('uploadable');
-        }
+        $node = $treeBuilder->getRootNode();
 
         $node
             ->addDefaultsIfNotSet()

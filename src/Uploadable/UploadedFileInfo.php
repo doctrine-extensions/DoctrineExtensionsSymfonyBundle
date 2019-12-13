@@ -26,7 +26,7 @@ class UploadedFileInfo implements FileInfoInterface
 
     public function getSize()
     {
-        return $this->uploadedFile->getClientSize();
+        return $this->uploadedFile->getSize();
     }
 
     public function getType()
@@ -40,7 +40,7 @@ class UploadedFileInfo implements FileInfoInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isUploadedFile()
     {
